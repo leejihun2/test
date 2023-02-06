@@ -16,19 +16,18 @@
 	
 	
 	<insert id="register">
-		INSERT INTO member (id, pass, name)
+		INSERT INTO member (id, name, pass)
 		VALUES
-		(#{_id_}, #{_pass_}, #{_name_})
+		(#{_id_}, #{_name_}, #{_pass_})
 	</insert>
 	
-	<update id="idmodify" parameterType="mybatis.MyMemberDTO">
+	<update id="idmodify">
 		UPDATE member
-		SET name=#{name} pass=#{pass}, 
-		WHERE id=#{id} 
+		SET name=#{__name}, pass=#{__pass}
+		WHERE id=#{__id} 
 	</update>
 	
-	<select id="idview" resultType="mybatis.MyMemberDTO"
-		parameterType="mybatis.ParameterDTO">
+	<select id="idview" resultType="mybatis.MyMemberDTO">
 		SELECT * FROM member WHERE id=#{user_id}
 	</select>
 	

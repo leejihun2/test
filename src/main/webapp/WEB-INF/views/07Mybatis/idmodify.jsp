@@ -21,20 +21,21 @@ background-color:#D9E5FF;
 </head>
 <body>
 <script type="text/javascript">
-function writeValidate(f)
+function idmodifyValidate(f)
 {
+	
 }
 </script>
 <div class="container">
 	<h3>방명록(글쓰기) - 
 		<small>Mybatis로 제작한 방명록입니다.</small></h3>
 	
-	<form name="writeFrm" method="post" 
-		onsubmit="return writeValidate(this);"
+	<form name="idmodifyFrm" method="post" 
+		onsubmit="return idmodifyValidate(this);"
 		action="<c:url value="/mybatis/idmodifyAction.do" />" >	
-	<input type="hid den" name="id" value="${dto.id }"/>
-	<input type="hid den" name="name" value="${dto.name }"/>
-	<input type="hid den" name="pass" value="${dto.pass }"/>
+	<input type="hid den" name="previd" value="${dto.id }"/>
+	<input type="hid den" name="prevname" value="${dto.name }"/>
+	<input type="hid den" name="prevpass" value="${dto.pass }"/>
 		
 	<table class="table table-bordered">
 	<colgroup>
@@ -46,12 +47,12 @@ function writeValidate(f)
 			<th class="text-center" 
 				style="vertical-align:middle;">아이디</th>
 			<td>
-				${dto.id }
+				<input type="text" name="id" readonly value="${dto.id }"/>
 			</td>
 		</tr>
 		<tr>
 			<th class="text-center" 
-				style="vertical-align:middle;">작성자</th>
+				style="vertical-align:middle;">이름</th>
 			<td>
 				<input type="text" class="form-control" 
 					style="width:130px;" name="name" 

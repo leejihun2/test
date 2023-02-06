@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import mybatis.MyBoardDTO;
@@ -287,18 +288,22 @@ public class MybatisController {
 		MyMemberDTO dto = sqlSession
 				.getMapper(ServiceMyMember.class)
 				.idview(parameterDTO);
-		
+		System.out.println("dto입니다"+ dto.getId()+"이름"+dto.getName()+"비밀번호"+dto.getPass());
 		model.addAttribute("dto", dto);
 		return "07Mybatis/idmodify";
 	}
 	
-	@RequestMapping("/mybatis/idmodifyAction.do")
-	public String idmodifyAction(HttpSession session,
-			MyMemberDTO myMemberDTO) {
+	@RequestMapping(value="/mybatis/idmodifyAction.do",
+	method=RequestMethod.POST)
+	public String idmodifyAction(MyMemberDTO myMemberDTO, HttpServletRequest req,
+			HttpSession session) {
 		
 		int applyRow = sqlSession
 				.getMapper(ServiceMyMember.class)
-				.idmodify(myMemberDTO);
+				.idmodify(req.getParameter("id"),
+						req.getParameter("name"),
+						req.getParameter("pass")); 
+		System.out.println("아이디"+req.getParameter("id")+"이름"+req.getParameter("name")+"비밀번호"+req.getParameter("pass"));
 		System.out.println("수정된행의갯수:"+ applyRow);
 		
 		return "redirect:listSearch.do";

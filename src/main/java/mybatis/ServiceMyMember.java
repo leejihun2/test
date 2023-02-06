@@ -12,11 +12,13 @@ public interface ServiceMyMember {
 	public MyMemberDTO logout(String id, String pass);
 	
 	//수정처리
-	public int idmodify(MyMemberDTO myMemberDTO);
+	public int idmodify(@Param("__id") String id,
+			@Param("__name") String name,
+			@Param("__pass") String pass);
 	
 	public MyMemberDTO idview(ParameterDTO parameterDTO);
 	
-	public int register(@Param("_name_") String name,
-			@Param("_pass_") String pass,
-			@Param("_id_") String id);
+	public int register(@Param("_id_") String id,
+			@Param("_name_") String name,
+			@Param("_pass_") String pass);
 }
