@@ -21,7 +21,7 @@ public interface ServiceMyBoard {
 	방명록 테이블에서 게시물의 갯수를 카운트하여 정수로 반환한다.
 	별도의 매개변수가 없으므로 항상 전체 레코드수를 반환하게된다.
 	 */
-	public int getTotalCount();
+	public int getTotalCount();     
 	/*
 	매개변수로 전달된 start, end를 통해 출력할 게시물을 인출한다.
 	인출된 게시물은 List컬렉션으로 반환된다.
