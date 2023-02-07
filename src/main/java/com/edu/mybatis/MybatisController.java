@@ -303,9 +303,31 @@ public class MybatisController {
 				.idmodify(req.getParameter("id"),
 						req.getParameter("name"),
 						req.getParameter("pass")); 
+		
+		
+		
+		//방법 1 : 세션에 저장된 DTO 객체에 직접적으로 변경된 값을 부여
+		((MyMemberDTO)session.getAttribute("UserInfo")).setName(req.getParameter("name"));
+		
+		//방법 2 : 업데이트된 정보를 DTO객체로 생성하여 세션에 저장 
+//		MyMemberDTO dto = sqlSession.getMapper(ServiceMyMember.class).login(
+//		        req.getParameter("id"), pass);
+//		  session.setAttribute("UserInfo", dto);
+		
+		//방법 3 : 방법2와 유사 ( 저장된 DTO객체를 삭제하고 다시 DB에서 값을 가져와 저장 )
+//      session.removeAttribute("UserInfo");
+//      MyMemberDTO dto = sqlSession.getMapper(ServiceMyMember.class).login(
+//            req.getParameter("id"), pass);
+//      session.setAttribute("UserInfo", dto);
+		
+		//예외 : invalidate()는 세션을 완전 말소방식 remove는 저장된 정보를 삭제하는 방식
+		// ( 서로 다르다는 것을 인지할 것! )
+//      session.invalidate()
+		
+		
 		System.out.println("아이디"+req.getParameter("id")+"이름"+req.getParameter("name")+"비밀번호"+req.getParameter("pass"));
 		System.out.println("수정된행의갯수:"+ applyRow);
-		((MyMemberDTO)session.getAttribute("siteUserInfo")).getName();
+		
 		
 		return "redirect:login.do";
 	}
@@ -337,7 +359,7 @@ public class MybatisController {
 		 */
 						
 		System.out.println("삭제된 행의 갯수 : " + applyRow);
-		return "redirect:listSearch.do";
+		return "redirect:login.do";
 	}
 	
 	//글쓰기 페이지 매핑
