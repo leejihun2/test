@@ -303,9 +303,9 @@ public class MybatisController {
 				.idmodify(req.getParameter("id"),
 						req.getParameter("name"),
 						req.getParameter("pass")); 
-		session.invalidate();
 		System.out.println("아이디"+req.getParameter("id")+"이름"+req.getParameter("name")+"비밀번호"+req.getParameter("pass"));
 		System.out.println("수정된행의갯수:"+ applyRow);
+		((MyMemberDTO)session.getAttribute("siteUserInfo")).getName();
 		
 		return "redirect:login.do";
 	}
