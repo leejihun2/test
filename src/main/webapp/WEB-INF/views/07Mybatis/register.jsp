@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+<script	src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
@@ -17,24 +18,30 @@
 </style>
 </head>
 <script type="text/javascript">
-function registValidate(f)
-{
-	if(f.id.value==""){
-		alert("아이디를 입력하세요.");
-		f.id.focus();
-		return false;
-	}
-	if(f.pass.value==""){
-		alert("패스워드를 입력하세요.");
-		f.pass.focus(); 
-		return false;
-	} 
-	if(f.name.value==""){
-		alert("이름을 입력하세요.");
-		f.name.focus(); 
-		return false;
-	} 
-}
+$(function(){
+	$("#submit").click(function(){
+		if($("#id").val()==""){
+			alert("아이디를 입력하세요");
+			$("#id").focus();
+			return false;
+		}
+		if($("#pass").val()==""){
+			alert("비밀번호를 입력하세요");
+			$("#pass").focus();
+			return false;
+		}
+		if($("#pass").val()!=$("#passCheck").val()){
+			alert("비밀번호가 서로 다릅니다");
+			$("#passCheck").focus();
+			return false;
+		}
+		if($("#name").val()==""){
+			alert("이름을 입력하세요");
+			$("#name").focus();
+			return false;
+		}
+	});
+});
 </script>
 <body>
 	<form action="<c:url value="/mybatis/registerAction.do" />" 
@@ -54,26 +61,30 @@ function registValidate(f)
                 <!-- 정보 입력 -->
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>
-                    <input type="text" name="id" class="form-control" placeholder="아이디(이메일)">
+                    <input class="form-control" type="text"
+                    	placeholder="아이디" id="id" name="id"/>
                 </div>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
-                    <input type="password" name="pass" class="form-control" placeholder="비밀번호">
+                    <input class="form-control" type="password"
+					placeholder="비밀번호" id="pass" name="pass" />
                 </div>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-shield-check"></i></span>
-                    <input type="password" class="form-control" placeholder="비밀번호 확인">
+                    <input class="form-control" type="password"
+					placeholder="비밀번호 확인" id="passCheck"/>
                 </div>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-person"></i></span>
-                    <input type="text" name="name" class="form-control" placeholder="이름">
+                    <input class="form-control" type="text"
+					placeholder="이름" id="name" name="name"/>
                 </div>
-                <div class="input-group">
+                <!-- <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-phone"></i></span>
                     <input type="text" class="form-control" placeholder="휴대폰 번호">
-                </div>
+                </div> -->
                 <div class="input-group">
-                    <button class="btn btn-primary" style="width: 700px; height: 60px;">
+                    <button class="btn btn-primary" type="submit" id="submit" style="width: 700px; height: 60px;">
                         <span style="font-weight: bold; font-size: 20px;">동의하고 가입하기</span>
                     </button>
                 </div>

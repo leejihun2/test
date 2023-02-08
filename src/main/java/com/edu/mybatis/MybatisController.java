@@ -309,6 +309,27 @@ public class MybatisController {
 		
 		return "redirect:login.do";
 	}
+	@RequestMapping("/mybatis/passCheck.do")
+	public String passCheck(Model model, HttpServletRequest req, HttpSession session) {
+		
+		if(session.getAttribute("siteUserInfo")==null) {
+			return "07Mybatis/idmodify";
+		}
+		
+		MyMemberDTO dto = sqlSession.getMapper(ServiceMyMember.class)
+				.memberInfo(((MyMemberDTO)session.getAttribute("siteUserInfo")).getId());
+		
+		if(req.getParameter("pass")==null) {
+			return "07Mybatis/idmodify";
+		}else if(req.getParameter("pass").equals(dto.getPass())){
+			model.addAttribute("dto",dto);
+			return "07Mybatis/idmodify";
+		}else {
+			model.addAttribute("PassError", "비밀번호가 다릅니다.");
+		}
+		
+		return "07Mybatis/idmodify";
+	}
 	
 	
 	
@@ -363,7 +384,45 @@ public class MybatisController {
 		return "redirect:login.do";
 	}
 	
+	@RequestMapping("/mybatis/findinfo.do")
+	public String find() {
+		return "07Mybatis/find";
+	}
 	
+	@RequestMapping("/mybatis/findAction.do")
+	public ModelAndView findAction(Model model, HttpServletRequest req) {
+		
+		MyMemberDTO dto;
+		ModelAndView mv = new ModelAndView();
+		String choice = req.getParameter("found");
+		boolean memberInfo = false;
+		
+		switch(choice) {
+			case "1":
+				dto = sqlSession.getMapper(ServiceMyMember.class)
+				.findId(req.getParameter("name"));
+				if(dto!=null) memberInfo=true;
+				mv.addObject("MemberInfo","찾으시는 계정의 아이디는 '"+dto.getId()+"'입니다.");
+				break;
+			case "2":
+				dto = sqlSession.getMapper(ServiceMyMember.class).findPass(
+						req.getParameter("id"),
+						req.getParameter("name"));
+				if(dto!=null) memberInfo=true;
+				mv.addObject("MemberInfo","찾으시는 계정의 비밀번호는 '"+dto.getPass()+"'입니다.");
+				break;
+		}
+		
+		
+		if(!(memberInfo)) {
+			mv.addObject("MemberInfo","해당 이름의 정보를 갖은 계정이 없습니다.");
+			mv.setViewName("07Mybatis/find");
+			return mv;
+		}
+		mv.setViewName("07Mybatis/find");
+		
+		return mv;
+	}
 	
 }
 

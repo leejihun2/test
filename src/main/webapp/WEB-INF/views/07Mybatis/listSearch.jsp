@@ -57,7 +57,7 @@ background-color:#D9E5FF;
 					로그아웃
 				</button>
 				<button class="btn btn-secondary"
-					onclick="location.href='idmodify.do';">
+					onclick="location.href='passCheck.do';">
 					회원정보수정
 				</button>
 			</c:when>

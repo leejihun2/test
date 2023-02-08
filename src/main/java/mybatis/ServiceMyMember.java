@@ -11,6 +11,14 @@ public interface ServiceMyMember {
 
 	public MyMemberDTO logout(String id, String pass);
 	
+	public MyMemberDTO findId(String name);
+	
+	public MyMemberDTO findPass(String id, String name);
+	
+	public MyMemberDTO memberInfo(String id);
+	
+	public int passCheck(String id, String name, String pass);
+	
 	//수정처리
 	public int idmodify(@Param("__id") String id,
 			@Param("__name") String name,

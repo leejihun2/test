@@ -31,5 +31,25 @@
 		SELECT * FROM member WHERE id=#{user_id}
 	</select>
 	
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultType="mybatis.MyMemberDTO">
+		SELECT id FROM member WHERE name = #{param1}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->	
+	<select id="findPass" resultType="mybatis.MyMemberDTO">
+		SELECT pass FROM member WHERE id = #{param1} AND name=#{param2} 
+	</select>
+	
+	<!-- 비밀번호 수정 -->
+	<update id="passCheck">
+		UPDATE member SET pass=#{param3}, name=#{param2} WHERE id=#{param1}
+	</update>
+	
+	<!-- 아이디에 해당하는 회원 정보 출력 -->
+	<select id="memberInfo" resultType="mybatis.MyMemberDTO">
+		SELECT * FROM member WHERE id = #{param1}
+	</select>
+	
 </mapper>
 
