@@ -18,6 +18,17 @@
 </style>
 </head>
 <script type="text/javascript">
+function openModal() {
+
+	var id = document.getElementById("id").value;
+	if (id == '') {
+		alert("아이디를 입력하고 누르세요");
+	} else {
+
+		window.open("./id_overapping.jsp?id=" + id, "idover",
+				"width=400px, height=400px");
+	}
+}
 $(function(){
 	$("#submit").click(function(){
 		if($("#id").val()==""){
@@ -63,6 +74,8 @@ $(function(){
                     <span class="input-group-text"><i class="bi bi-envelope"></i></span>
                     <input class="form-control" type="text"
                     	placeholder="아이디" id="id" name="id"/>
+                    	<button type="button" onclick="openModal();"
+						class="btn2 mt-4">중복확인</button>
                 </div>
                 <div class="input-group">
                     <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>

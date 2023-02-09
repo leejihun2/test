@@ -13,6 +13,10 @@
 	<select id="login" resultType="mybatis.MyMemberDTO">
 		SELECT * FROM member WHERE id=#{param1} and pass=#{param2}
 	</select>
+
+	<select id="dupid" resultType="mybatis.MyMemberDTO">
+		SELECT id from member where id=#{param1}
+	</select>
 	
 	
 	<insert id="register">

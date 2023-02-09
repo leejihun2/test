@@ -13,6 +13,8 @@ public interface ServiceMyMember {
 	
 	public MyMemberDTO findId(String name);
 	
+	public MyMemberDTO dupid(String id);
+	
 	public MyMemberDTO findPass(String id, String name);
 	
 	public MyMemberDTO memberInfo(String id);
