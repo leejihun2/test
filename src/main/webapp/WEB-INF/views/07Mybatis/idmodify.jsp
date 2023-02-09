@@ -88,7 +88,7 @@ $(function(){
 				</td>
 			</tr>
 		</tbody>
-		</table>
+		</table>  
 		
 		<div class="row text-center" style="">
 			<!-- 각종 버튼 부분 -->		
