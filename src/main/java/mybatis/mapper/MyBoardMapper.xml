@@ -77,6 +77,8 @@
 		SELECT * FROM myboard WHERE idx=#{board_idx}
 		AND id=#{user_id}
 	</select>
+	
+	
 
 	<!-- 수정처리하기. 전송된 폼값은 커맨드 객체를 통해 한번에 전달되므로 parameterType을 해당 DTO로 설정한 후 멤버변수명으로 
 		값을 읽어와서 쿼리문에 설정한다. -->
